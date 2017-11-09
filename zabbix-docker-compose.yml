@@ -34,8 +34,6 @@ services:
       - zabbix-server-mysql
     ports:
       - 8080:80
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
     links:
       - mysql-server:mysql
       - zabbix-server-mysql:zabbix-server
@@ -45,6 +43,8 @@ services:
       - MYSQL_USER=zabbix
       - MYSQL_PASSWORD=zabbix_pwd
       - MYSQL_ROOT_PASSWORD=root_pwd
+volumes:
+  mysql_data:
 networks:
     default:
         driver: bridge
