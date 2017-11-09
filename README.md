@@ -16,7 +16,7 @@ Ports:
 3. 8080/tcp For Web Interface
 
 Mounts:
-1. DB data files mysql_data/ on host mounted on container's /var/lib/mysql
+1. DB data files mysql_data/ on host are mounted on container's /var/lib/mysql
 
 Usage
 2. docker-compose -f zabbix-docker-compose.yml up -d
