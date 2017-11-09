@@ -11,11 +11,12 @@ Contains 3 images:
 3. zabbix/zabbix-web-nginx-mysql:latest
 
 Ports:
-
 1. 3306/tcp for DB conections
 2. 10051/tcp Zabbix checks
 3. 8080/tcp For Web Interface
 
-Usage
+Mounts:
+1. DB data files mysql_data/ on host mounted on container's /var/lib/mysql
 
-docker-compose -f zabbix-docker-compose.yml up -d
+Usage
+2. docker-compose -f zabbix-docker-compose.yml up -d
