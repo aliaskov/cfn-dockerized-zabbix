@@ -4,11 +4,13 @@ Services:
 1. DB
 2. Zabbix server
 3. Zabbix web interface
+4. Zabbix agent with scripts, based on original zabbix/zabbix-agent
 
 Contains 3 images:
 1. mysql:5.7
 2. zabbix/zabbix-server-mysql:latest
 3. zabbix/zabbix-web-nginx-mysql:latest
+4. aliaskov/aws-zabbix-agent:latest
 
 Ports:
 1. 3306/tcp for DB conections
