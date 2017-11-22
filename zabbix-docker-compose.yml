@@ -6,7 +6,7 @@ services:
      ports:
       - 3306:3306
      volumes:
-      - mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
      restart: always
      environment:
       - MYSQL_DATABASE=zabbix
@@ -43,8 +43,24 @@ services:
       - MYSQL_USER=zabbix
       - MYSQL_PASSWORD=zabbix_pwd
       - MYSQL_ROOT_PASSWORD=root_pwd
-volumes:
-  mysql_data:
+  aws-zabbix-agent:
+    image: aliaskov/aws-zabbix-agent:latest
+    links:
+      - zabbix-server-mysql:zabbix-server
+    volumes:
+      - ./zabbix_scripts:/etc/zabbix/zabbix_scripts
+      - ./zabbix_conf:/etc/zabbix/zabbix_agentd.d
+    restart: always
+    environment:
+      - ZBX_HOSTNAME=zabbix
+      - ZBX_METADATA=linux,aws
+      - ZBX_STARTAGENTS=0
+      - ZBX_BUFFERSEND=5
+      - ZBX_BUFFERSIZE=100
+      - ZBX_MAXLINESPERSECOND=1000
+      - ZBX_TIMEOUT=25
+      - ZBX_REFRESHACTIVECHECKS=120
+      - ZBX_ACTIVESERVERS=localhost:10051
 networks:
     default:
         driver: bridge

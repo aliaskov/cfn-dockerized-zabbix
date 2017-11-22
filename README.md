@@ -19,4 +19,5 @@ Mounts:
 1. DB data files mysql_data/ on host are mounted on container's /var/lib/mysql
 
 Usage
-2. docker-compose -f zabbix-docker-compose.yml up -d
+
+ docker-compose -f zabbix-docker-compose.yml up -d
