@@ -1,4 +1,4 @@
-# docker compose file for zabbix stack
+# My version of zabbix aws monitoring
 
 Why is it unique?
 
