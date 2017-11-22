@@ -10,8 +10,8 @@ Services:
 3. Zabbix web interface
 4. Zabbix agent with scripts, based on original zabbix/zabbix-agent alpine image
 
-Contains 4 images:
-1. mysql:5.7
+Docker-compose file use 4 images:
+1. mysql:5.7 
 2. zabbix/zabbix-server-mysql:latest
 3. zabbix/zabbix-web-nginx-mysql:latest
 4. aliaskov/aws-zabbix-agent:latest
@@ -26,7 +26,7 @@ Mounts:
 2. Custom py scripts  from agent_scripts/ are mounted on container's  /etc/zabbix/zabbix_scripts
 3. Config files for scripts  from agent_conf/ are mounted on container's  /etc/zabbix/zabbix_agentd.d
 
-AWS permissions:
+AWS permissions (Assign role with listed policies to EC2 instance, where this stack runs):
 1. Cloudwatch readonly
 2. EC2 readonly
 3. RDS readonly (if RDS monitoring is needed)
