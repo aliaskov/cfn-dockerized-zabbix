@@ -44,3 +44,5 @@ Usage
 Don't forget to delete all existing teplates, and disconnect zabbix server from default linux PASSIVE template.
 
 ![](https://github.com/aliaskov/dockerized-zabbix/raw/master/templates.png)
+
+Enable zabbix server host and wait for aws services discovery
