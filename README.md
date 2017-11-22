@@ -39,3 +39,5 @@ Usage
  docker-compose -f zabbix-docker-compose.yml up -d
 
 2. Import xml files (from templates dir) to zabbix web frontend, using web interface : Configuration - Templates - Import
+Don't forget to delete all existing teplates, and disconnect zabbix server from default linux PASSIVE template.
+![alt text](https://raw.githubusercontent.com/aliaskov/dockerized-zabbix/templates.png)
