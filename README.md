@@ -3,6 +3,7 @@
 Why is it unique?
 
 Zabbix agent automatically connects to cloudwatch and discovers AWS services (EC, EC2, RDS, ASG, DynamoDB) and starts monitoring "out of the box". It's not perfect, templates require some tuning and adjustments.
+![](https://github.com/aliaskov/dockerized-zabbix/raw/master/main_dash.png)
 
 Services:
 1. DB
@@ -11,7 +12,7 @@ Services:
 4. Zabbix agent with scripts, based on original zabbix/zabbix-agent alpine image
 
 Docker-compose file use 4 images:
-1. mysql:5.7 
+1. mysql:5.7
 2. zabbix/zabbix-server-mysql:latest
 3. zabbix/zabbix-web-nginx-mysql:latest
 4. aliaskov/aws-zabbix-agent:latest
@@ -47,9 +48,9 @@ Don't forget to delete all existing teplates, and disconnect zabbix server from 
 
 Enable zabbix server host and wait for aws services discovery
 ![](https://github.com/aliaskov/dockerized-zabbix/raw/master/hosts.png)
-zabbix - is automatically discovered host, which is a docker container with zabbix agent. 
-Zabbix server - is a default entry. Make sure that AWS Services template is applied on it 
+zabbix - is automatically discovered host, which is a docker container with zabbix agent.
+Zabbix server - is a default entry. Make sure that AWS Services template is applied on it
 
-Alternative way of importing templates: 
-Modify DB/data.sql which contains default items,triggers, etc. and it is a part of zabbix/zabbix-server-mysql container (/usr/share/doc/zabbix-server-mysql/data.sql) and build your own zabbix-server-mysql image. 
+Alternative way of importing templates:
+Modify DB/data.sql which contains default items,triggers, etc. and it is a part of zabbix/zabbix-server-mysql container (/usr/share/doc/zabbix-server-mysql/data.sql) and build your own zabbix-server-mysql image.
 Almost empty DBdump is in DB/MyzabbixDump.sql
