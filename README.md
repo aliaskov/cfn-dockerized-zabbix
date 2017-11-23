@@ -42,7 +42,7 @@ Usage
 2. Import xml files (from templates dir) to zabbix web frontend, using web interface : Configuration - Templates - Import
 
 
-Don't forget to delete all existing teplates, and disconnect zabbix server from default linux PASSIVE template.
+Don't forget to delete all existing templates, and disconnect zabbix server from default linux PASSIVE template.
 
 ![](https://github.com/aliaskov/dockerized-zabbix/raw/master/templates.png)
 
@@ -50,6 +50,9 @@ Enable zabbix server host and wait for aws services discovery
 ![](https://github.com/aliaskov/dockerized-zabbix/raw/master/hosts.png)
 zabbix - is automatically discovered host, which is a docker container with zabbix agent.
 Zabbix server - is a default entry. Make sure that AWS Services template is applied on it
+
+3. Create auto-registration actions to make "auto discovery" work:
+![](https://github.com/aliaskov/dockerized-zabbix/raw/master/actions.png)
 
 Alternative way of importing templates:
 Modify DB/data.sql which contains default items,triggers, etc. and it is a part of zabbix/zabbix-server-mysql container (/usr/share/doc/zabbix-server-mysql/data.sql) and build your own zabbix-server-mysql image.
