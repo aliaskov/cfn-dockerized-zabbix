@@ -1,4 +1,4 @@
-# docker compose file for zabbix stack
+# My version of zabbix aws monitoring
 
 Why is it unique?
 
@@ -10,8 +10,8 @@ Services:
 3. Zabbix web interface
 4. Zabbix agent with scripts, based on original zabbix/zabbix-agent alpine image
 
-Contains 4 images:
-1. mysql:5.7
+Docker-compose file use 4 images:
+1. mysql:5.7 
 2. zabbix/zabbix-server-mysql:latest
 3. zabbix/zabbix-web-nginx-mysql:latest
 4. aliaskov/aws-zabbix-agent:latest
@@ -26,7 +26,7 @@ Mounts:
 2. Custom py scripts  from agent_scripts/ are mounted on container's  /etc/zabbix/zabbix_scripts
 3. Config files for scripts  from agent_conf/ are mounted on container's  /etc/zabbix/zabbix_agentd.d
 
-AWS permissions:
+AWS permissions (Assign role with listed policies to EC2 instance, where this stack runs):
 1. Cloudwatch readonly
 2. EC2 readonly
 3. RDS readonly (if RDS monitoring is needed)
@@ -39,5 +39,10 @@ Usage
  docker-compose -f zabbix-docker-compose.yml up -d
 
 2. Import xml files (from templates dir) to zabbix web frontend, using web interface : Configuration - Templates - Import
+
+
 Don't forget to delete all existing teplates, and disconnect zabbix server from default linux PASSIVE template.
-![alt text](https://raw.githubusercontent.com/aliaskov/dockerized-zabbix/templates.png)
+
+![](https://github.com/aliaskov/dockerized-zabbix/raw/master/templates.png)
+
+Enable zabbix server host and wait for aws services discovery
