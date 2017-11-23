@@ -46,3 +46,6 @@ Don't forget to delete all existing teplates, and disconnect zabbix server from 
 ![](https://github.com/aliaskov/dockerized-zabbix/raw/master/templates.png)
 
 Enable zabbix server host and wait for aws services discovery
+![](https://github.com/aliaskov/dockerized-zabbix/raw/master/hosts.png)
+zabbix - is automatically discovered host, which is a docker container with zabbix agent. 
+Zabbix server - is a default entry. Make sure that AWS Services template is applied on it 
