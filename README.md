@@ -49,3 +49,7 @@ Enable zabbix server host and wait for aws services discovery
 ![](https://github.com/aliaskov/dockerized-zabbix/raw/master/hosts.png)
 zabbix - is automatically discovered host, which is a docker container with zabbix agent. 
 Zabbix server - is a default entry. Make sure that AWS Services template is applied on it 
+
+Alternative way of importing templates: 
+Modify DB/data.sql which contains default items,triggers, etc. and it is a part of zabbix/zabbix-server-mysql container (/usr/share/doc/zabbix-server-mysql/data.sql) and build your ownzabbix-server-mysql image. 
+Almost empty DBdump is in DB/MyzabbixDump.sql
