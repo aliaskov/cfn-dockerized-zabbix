@@ -40,7 +40,8 @@ Usage
 AWS - CloudFormation - Create Stack - Upload a template to Amazon S3 - aws-cfn-ec2-zabbix-template.json
 ![](https://github.com/aliaskov/dockerized-zabbix/raw/master/CFN.png)
 
-1. Use docker compose file to start stack.
+1. CloudFormation template adds userdata in order to pull docker compose file to start stack.
+Check /var/log/user-data.log, fix possible issues and start stack manually if needed:
  docker-compose -f zabbix-docker-compose.yml up -d
 
 2. Import xml files (from templates dir) to zabbix web frontend, using web interface : Configuration - Templates - Import
