@@ -36,6 +36,10 @@ AWS permissions (Assign role with listed policies to EC2 instance, where this st
 
 Usage
 
+0. Try using CloudFormation template to launch EC2, attach EBS and create Zabbix role:
+AWS - CloudFormation - Create Stack - Upload a template to Amazon S3 - aws-cfn-ec2-zabbix-template.json
+![](https://github.com/aliaskov/dockerized-zabbix/raw/master/CFN.png)
+
 1. Use docker compose file to start stack.
  docker-compose -f zabbix-docker-compose.yml up -d
 

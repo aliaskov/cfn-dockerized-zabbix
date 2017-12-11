@@ -2,11 +2,6 @@
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "Dockerized Zabbix CloudFormation template",
     "Parameters": {
-        "Version": {
-            "Type": "String",
-            "Description": "Version of the application that will be used.",
-            "Default": "ZabbixLatest"
-        },
         "KeyPair": {
             "Type": "String",
             "Description": "Key pair name.",
@@ -32,11 +27,6 @@
             "Type": "String",
             "Description": "Domain that serves as HostedZone for Route53.",
             "Default": "mytestdomain.com"
-        },
-        "StackName": {
-            "Type": "String",
-            "Description": "Stack Name, used in DNS record as well",
-            "Default": "Zabbix"
         },
         "VolumeSize": {
             "Type": "String",
@@ -140,11 +130,6 @@
                         ]
                     }
                 }, {
-                    "Key": "version",
-                    "Value": {
-                        "Ref": "Version"
-                    }
-                }, {
                     "Key": "maintainer",
                     "Value": "devops"
                 }]
@@ -232,11 +217,6 @@
                     }
                 },
                 "Tags": [{
-                    "Key": "version",
-                    "Value": {
-                        "Ref": "Version"
-                    }
-                }, {
                     "Key": "maintainer",
                     "Value": "devops"
                 }, {
