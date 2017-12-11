@@ -22,10 +22,20 @@
             "Description": "Cloudformation Stack Name containing the VPC.",
             "Default": "skynet-vpc"
         },
+        "VPCId": {
+            "Description": "Id of desired VPC",
+            "Type": "String",
+            "Default": "vpc-XXXXXXXX"
+        },
+        "SubnetId": {
+            "Description": "Id of desired subnet",
+            "Type": "String",
+            "Default": "subnet-XXXXXXXX"
+        },
         "Domain": {
             "Type": "String",
             "Description": "Domain that serves as HostedZone for Route53.",
-            "Default": "goodgamestudios.com"
+            "Default": "mytestdomain.com"
         },
         "StackName": {
             "Type": "String",
@@ -72,7 +82,7 @@
                     "Fn::Sub": "${Domain}."
                 },
                 "Name": {
-                    "Fn::Sub": "${AWS::StackName}.internal.${AWS::URLSuffix}."
+                    "Fn::Sub": "${AWS::StackName}.${Environment}.${Domain}."
                 },
                 "Type": "A",
                 "TTL": "60",
@@ -89,9 +99,7 @@
             "Properties": {
                 "GroupDescription": "zabbix_sg",
                 "VpcId": {
-                    "Fn::ImportValue": {
-                        "Fn::Sub": "${AWS::StackName}-VpcId"
-                    }
+                    "Ref": "${VPCId}"
                 },
                 "SecurityGroupIngress": [{
                     "IpProtocol": "tcp",
@@ -191,9 +199,7 @@
                 "NetworkInterfaces": [{
                     "DeviceIndex": "0",
                     "SubnetId": {
-                        "Fn::ImportValue": {
-                            "Fn::Sub": "${VpcStackName}-SubnetAId"
-                        }
+                            "Fn::Sub": "${SubnetId}"
                     },
                     "GroupSet": [{
                         "Ref": "SecurityGroup"
