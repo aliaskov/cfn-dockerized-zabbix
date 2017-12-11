@@ -21,12 +21,13 @@
         },
         "VpcStackName": {
             "Type": "String",
-            "Description": "Cloudformation Stack Name containing the VPC."
+            "Description": "Cloudformation Stack Name containing the VPC.",
+            "Default": "skynet-vpc"
         },
         "Domain": {
             "Type": "String",
             "Description": "Domain that serves as HostedZone for Route53.",
-            "Default": "${AWS::URLSuffix}"
+            "Default": "goodgamestudios.com"
         },
         "AwsAccountId": {
             "Type": "String",
@@ -82,7 +83,7 @@
                     "Fn::Sub": "${Domain}."
                 },
                 "Name": {
-                    "Fn::Sub": "${AWS::StackName}.${AWS::URLSuffix}."
+                    "Fn::Sub": "${AWS::StackName}.internal.${AWS::URLSuffix}."
                 },
                 "Type": "A",
                 "TTL": "60",
@@ -222,7 +223,7 @@
                                 "#!/bin/bash -xe\n",
                                 "exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1\n",
                                 "if ! blkid /dev/xvdk; then mkfs -t ext4 /dev/xvdk; fi\n",
-                                "mount /dev/xvdk /data\n",
+                                "mount /dev/xvdk /opt\n",
                                 "yum install -y git\n",
                                 "mkdir -p /opt/zabbix\n",
                                 "git clone https://github.com/aliaskov/dockerized-zabbix.git /opt/zabbix/"
