@@ -1,23 +1,21 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "${AWS::StackName} cfn template",
+    "Description": "Dockerized Zabbix CloudFormation template",
     "Parameters": {
         "Version": {
             "Type": "String",
-            "Description": "Version of the application docker image that will be used."
+            "Description": "Version of the application that will be used.",
+            "Default": "ZabbixLatest"
         },
         "Environment": {
             "Type": "String",
-            "Description": "Environment of this stack."
+            "Description": "Environment of this stack (test,prod, whatever).",
+            "Default": "Production"
         },
         "KeyPair": {
             "Type": "String",
             "Description": "Key pair name.",
             "Default": "delta"
-        },
-        "DeploymentDate": {
-            "Type": "String",
-            "Description": "Date of deployment."
         },
         "VpcStackName": {
             "Type": "String",
@@ -29,19 +27,10 @@
             "Description": "Domain that serves as HostedZone for Route53.",
             "Default": "goodgamestudios.com"
         },
-        "AwsAccountId": {
-            "Type": "String",
-            "Description": "Account ID",
-            "Default": "${AWS::AccountId}"
-        },
-        "CertificateArn": {
-            "Type": "String",
-            "Description": "Wildcard Certificate - from aws iam list-server-certificates"
-        },
         "StackName": {
             "Type": "String",
             "Description": "Cloudformation Stack Name",
-            "Default": "Zabbix"
+            "Default": "Dockerized Zabbix stack"
         },
         "VolumeSize": {
             "Type": "String",
@@ -226,7 +215,7 @@
                                 "mount /dev/xvdk /opt\n",
                                 "yum install -y git\n",
                                 "mkdir -p /opt/zabbix\n",
-                                "git clone https://github.com/aliaskov/dockerized-zabbix.git /opt/zabbix/"
+                                "git clone https://github.com/aliaskov/dockerized-zabbix.git /opt/zabbix/",
                                 "docker-compose -f /opt/zabbix/zabbix-docker-compose.yml up -d"
                             ]
                         ]
