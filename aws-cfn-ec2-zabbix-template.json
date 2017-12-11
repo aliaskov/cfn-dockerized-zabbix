@@ -7,26 +7,22 @@
             "Description": "Version of the application that will be used.",
             "Default": "ZabbixLatest"
         },
-        "Environment": {
-            "Type": "String",
-            "Description": "Environment of this stack (test,prod, whatever).",
-            "Default": "Production"
-        },
         "KeyPair": {
             "Type": "String",
             "Description": "Key pair name.",
             "Default": "delta"
         },
-        "VpcStackName": {
-            "Type": "String",
-            "Description": "Cloudformation Stack Name containing the VPC.",
-            "Default": "skynet-vpc"
-        },
-        "VPCId": {
+        "VpcStackId": {
             "Description": "Id of desired VPC",
             "Type": "String",
             "Default": "vpc-XXXXXXXX"
         },
+        "AvailabilityZone": {
+            "Description": "AvailabilityZone of Stack",
+            "Type": "String",
+            "Default": "eu-west-1a"
+        },
+
         "SubnetId": {
             "Description": "Id of desired subnet",
             "Type": "String",
@@ -39,13 +35,18 @@
         },
         "StackName": {
             "Type": "String",
-            "Description": "Cloudformation Stack Name",
-            "Default": "Dockerized Zabbix stack"
+            "Description": "Stack Name, used in DNS record as well",
+            "Default": "Zabbix"
         },
         "VolumeSize": {
             "Type": "String",
-            "Description": "Data Volume size",
+            "Description": "Zabbix Data Volume size",
             "Default": "100"
+        },
+        "VolumeType": {
+            "Type": "String",
+            "Description": "Zabbix Data Volume type",
+            "Default": "gp2"
         },
         "InstanceType": {
             "Type": "String",
@@ -82,7 +83,7 @@
                     "Fn::Sub": "${Domain}."
                 },
                 "Name": {
-                    "Fn::Sub": "${AWS::StackName}.${Environment}.${Domain}."
+                    "Fn::Sub": "${AWS::StackName}.${Domain}."
                 },
                 "Type": "A",
                 "TTL": "60",
@@ -99,7 +100,7 @@
             "Properties": {
                 "GroupDescription": "zabbix_sg",
                 "VpcId": {
-                    "Ref": "${VPCId}"
+                    "Fn::Sub": "${VpcStackId}"
                 },
                 "SecurityGroupIngress": [{
                     "IpProtocol": "tcp",
@@ -155,11 +156,11 @@
                 "Size": {
                     "Ref": "VolumeSize"
                 },
-                "VolumeType": "gp2",
+                "VolumeType": {
+                    "Ref": "VolumeType"
+                },
                 "AvailabilityZone": {
-                    "Fn::ImportValue": {
-                        "Fn::Sub": "${VpcStackName}-SubnetAAvailabilityZone"
-                    }
+                    "Fn::Sub": "${AvailabilityZone}"
                 },
                 "Tags": [{
                     "Key": "Backup",
@@ -190,6 +191,9 @@
                 "InstanceType": {
                     "Ref": "InstanceType"
                 },
+                "AvailabilityZone": {
+                    "Fn::Sub": "${AvailabilityZone}"
+                },
                 "IamInstanceProfile": {
                     "Ref": "ZabbixInstanceProfile"
                 },
@@ -199,7 +203,7 @@
                 "NetworkInterfaces": [{
                     "DeviceIndex": "0",
                     "SubnetId": {
-                            "Fn::Sub": "${SubnetId}"
+                        "Fn::Sub": "${SubnetId}"
                     },
                     "GroupSet": [{
                         "Ref": "SecurityGroup"
