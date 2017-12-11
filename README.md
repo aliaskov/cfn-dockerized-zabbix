@@ -27,7 +27,7 @@ Mounts:
 2. Custom py scripts  from agent_scripts/ are mounted on container's  /etc/zabbix/zabbix_scripts
 3. Config files for scripts  from agent_conf/ are mounted on container's  /etc/zabbix/zabbix_agentd.d
 
-AWS permissions (Assign role with listed policies to EC2 instance, where this stack runs):
+AWS permissions (CloudFormation template creates and assigns role with listed policies to EC2 instance, where this stack runs):
 1. Cloudwatch readonly
 2. EC2 readonly
 3. RDS readonly (if RDS monitoring is needed)
@@ -62,3 +62,6 @@ Zabbix server - is a default entry. Make sure that AWS Services template is appl
 Alternative way of importing templates:
 Modify DB/data.sql which contains default items,triggers, etc. and it is a part of zabbix/zabbix-server-mysql container (/usr/share/doc/zabbix-server-mysql/data.sql) and build your own zabbix-server-mysql image.
 Almost empty DBdump is in DB/MyzabbixDump.sql
+
+One more way or importing templates:
+https://www.zabbix.com/documentation/3.2/manual/api
