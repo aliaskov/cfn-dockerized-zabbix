@@ -209,6 +209,7 @@
                                 "exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1\n",
                                 "if ! blkid /dev/xvdk; then mkfs -t ext4 /dev/xvdk; fi\n",
                                 "mount /dev/xvdk /opt\n",
+                                "echo \"/dev/xvdk /opt ext4 defaults,nofail 0 2\" >> /etc/fstab\n",
                                 "yum install -y git\n",
                                 "mkdir -p /opt/zabbix\n",
                                 "git clone https://github.com/aliaskov/dockerized-zabbix.git /opt/zabbix/",
