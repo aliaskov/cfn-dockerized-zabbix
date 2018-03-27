@@ -61,6 +61,9 @@
             "eu-west-2": {
                 "Ami": "ami-dbfee1bf"
             },
+            "eu-central-1": {
+                "Ami": "ami-ac055447"
+            },
             "eu-west-1": {
                 "Ami": "ami-4cbe0935"
             }
@@ -210,9 +213,12 @@
                                 "if ! blkid /dev/xvdk; then mkfs -t ext4 /dev/xvdk; fi\n",
                                 "mount /dev/xvdk /opt\n",
                                 "echo \"/dev/xvdk /opt ext4 defaults,nofail 0 2\" >> /etc/fstab\n",
-                                "yum install -y git\n",
-                                "mkdir -p /opt/zabbix\n",
-                                "git clone https://github.com/aliaskov/dockerized-zabbix.git /opt/zabbix/",
+                                "sudo yum install -y git\n",
+                                "sudo mkdir -p /opt/zabbix\n",
+                                "sudo chown ec2-user:ec2-user /opt/zabbix\n",
+                                "git clone https://github.com/aliaskov/dockerized-zabbix.git /opt/zabbix/\n",
+                                "sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose\n",
+                                "sudo chmod +x /usr/local/bin/docker-compose\n",
                                 "docker-compose -f /opt/zabbix/zabbix-docker-compose.yml up -d"
                             ]
                         ]
