@@ -47,8 +47,8 @@ services:
     build:
       context: zabbix_agent/
     volumes:
-      - ./zabbix_agent/zabbix_scripts:/etc/zabbix/zabbix_scripts
-      - ./zabbix_agent/zabbix_conf:/etc/zabbix/zabbix_agentd.d
+      - ./zabbix_agent/agent_scripts:/etc/zabbix/zabbix_scripts:ro
+      - ./zabbix_agent/agent_conf:/etc/zabbix/zabbix_agentd.d:ro
     restart: always
     links:
       - zabbix-server-mysql:zabbix-server
