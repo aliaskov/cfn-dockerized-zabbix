@@ -44,15 +44,14 @@ services:
       - MYSQL_PASSWORD=zabbix_pwd
       - MYSQL_ROOT_PASSWORD=root_pwd
   aws-zabbix-agent:
-    image: zabbix/zabbix-agent:latest
-    links:
-      - zabbix-server-mysql:zabbix-server
     build:
       context: zabbix_agent/
     volumes:
       - ./zabbix_agent/zabbix_scripts:/etc/zabbix/zabbix_scripts
       - ./zabbix_agent/zabbix_conf:/etc/zabbix/zabbix_agentd.d
     restart: always
+    links:
+      - zabbix-server-mysql:zabbix-server
     environment:
       - ZBX_HOSTNAME=zabbix
       - ZBX_METADATA=linux,aws
